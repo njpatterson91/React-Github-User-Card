@@ -18,14 +18,25 @@ class App extends React.Component {
   componentDidMount() {
     this.getData(this.state.userName);
   }
+  handleUserChange = (e) => {
+    this.setState({
+      userName: e.target.value,
+    });
+  };
+  handleSearch = (e) => {
+    e.preventDefault();
+    this.getData(this.state.userName);
+  };
 
   render() {
-    console.log(this.state.userDetails);
     return (
       <div>
         <h1>Github User Search</h1>
-        <Search />
-        <Results />
+        <Search
+          handleSearch={this.handleSearch}
+          handleUserChange={this.handleUserChange}
+        />
+        <Results data={this.state.userDetails} />
       </div>
     );
   }
